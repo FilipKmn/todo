@@ -1,0 +1,63 @@
+    todo project(
+        backend server[
+            template java
+            developer (dvesin, nmilinkovic, nolah, mjovanovic, bgvoka)
+            security (principal User, role UserRole)
+            signIn (email)](
+    
+            UserRole enum(ADMIN, CUSTOMER)
+    
+            User model(
+                firstName text[min 1, max 40]
+                lastName text[min 1, max 60]
+            )
+    
+            Todo model(
+                user User
+                task text[min 1, max 100]
+                date date
+            )
+    
+            TodoApi api(
+                todo crud[model Todo, rest, secured (ADMIN, CUSTOMER)]
+                todos find[from Todo where Todo.user == principal, rest, secured (ADMIN, CUSTOMER)]
+            )
+    
+            UserApi api(
+                users find[from User, rest, secured ADMIN]
+                userTodos paged[from Todo where Todo.user.id == userId, rest, secured ADMIN]
+            )
+        )
+    
+        adminPortal client[connectedTo backend, template angularJs](
+            usersPage page[path /user/list, secured ADMIN](
+                users list[load backend.UserApi.users]{
+                    on select fire UserSelected(selected.id)
+                }
+    
+               todos list[load backend.UserApi.userTodos]{
+                    on UserSelected reload(event.id)
+               }
+            )
+        )
+    
+        todoApp client[connectedTo backend.TodoApi, template android](
+            todoPage page[path /todo/list, secured CUSTOMER](
+                addTodo button {on click goto todoCreatePage}
+    
+                todos list[load backend.TodoApi.todos]{
+                    on select goto todoEditPage(selected.id)
+                }
+            )
+            todoCreatePage page[path /todo/create, secured CUSTOMER](
+                todoCreateForm form[submit backend.TodoApi.todo.create]{
+                    on success goto todoPage
+                }
+            )
+            todoEditPage page[path /todo/edit/:id, params(id long), secured CUSTOMER](
+                todoEditForm form[load backend.TodoApi.todo.read(params.id), submit backend.TodoApi.todo.update]{
+                    on success goto todoPage
+                }
+            )
+        )
+    )
