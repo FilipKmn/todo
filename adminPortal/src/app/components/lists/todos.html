@@ -1,0 +1,15 @@
+<div ng-repeat="item in model">
+    <dl>
+        <dt>{{'TODOS_ID' | translate}}</dt>
+        <dd>{{item.id}}</dd>
+        <dt>{{'TODOS_USER_ID' | translate}}</dt>
+        <dd>{{item.userId}}</dd>
+        <dt>{{'TODOS_TASK' | translate}}</dt>
+        <dd>{{item.task}}</dd>
+        <dt>{{'TODOS_DATE' | translate}}</dt>
+        <dd>{{item.date}}</dd>
+    </dl>
+</div>
+<div ng-show="errorCode">
+    <div class="error">{{errorCode | translate}}</div>
+</div>

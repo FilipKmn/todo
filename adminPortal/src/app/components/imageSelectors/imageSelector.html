@@ -1,0 +1,10 @@
+<div>
+    <img data-ng-src="data:image/png;base64,{{base64}}" data-ng-show="base64" err-src="img/no-image.png" />
+    <div class="edit-image">
+        <div class="icon-upload-photo"></div>
+        <div class="upload-text">{{'UPLOAD_PHOTO' | translate}}</div>
+        <input type="file" ng-model="key" />
+        <input type="text" ng-show="false" required ng-model="flagValid" id="{{id}}" name="{{name}}"> {{name}}
+    </div>
+    <div class="required-image-sign" data-ng-show="required">*</div>
+</div>

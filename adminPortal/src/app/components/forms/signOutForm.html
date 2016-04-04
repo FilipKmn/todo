@@ -1,0 +1,11 @@
+<form name="signOutForm" role="form" novalidate ng-submit="submit(signOutForm)">
+
+    <div class="form-group submit clearfix">
+        <button type="submit" class="btn btn-primary btn-block">
+            {{'SIGN_OUT_FORM_SUBMIT' | translate}}
+        </button>
+    </div>
+    <div ng-show="errorCode">
+        <div class="error">{{errorCode | translate}}</div>
+    </div>
+</form>

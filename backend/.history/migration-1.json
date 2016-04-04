@@ -1,0 +1,178 @@
+{
+  "name" : "backend",
+  "models" : [ {
+    "name" : "User",
+    "properties" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "text",
+      "name" : "firstName",
+      "wrappers" : [ ],
+      "minSize" : "1",
+      "maxSize" : "40"
+    }, {
+      "dslType" : "text",
+      "name" : "lastName",
+      "wrappers" : [ ],
+      "minSize" : "1",
+      "maxSize" : "60"
+    }, {
+      "dslType" : "enum",
+      "name" : "role",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "text",
+      "name" : "email",
+      "wrappers" : [ ],
+      "minSize" : "6",
+      "maxSize" : "128"
+    }, {
+      "dslType" : "text",
+      "name" : "passwordHash",
+      "wrappers" : [ ],
+      "minSize" : "6",
+      "maxSize" : "128"
+    }, {
+      "dslType" : "text",
+      "name" : "emailVerificationCode",
+      "wrappers" : [ "OPTIONAL" ],
+      "minSize" : "64",
+      "maxSize" : "64"
+    }, {
+      "dslType" : "datetime",
+      "name" : "emailVerificationCodeTimestamp",
+      "wrappers" : [ "OPTIONAL" ]
+    }, {
+      "dslType" : "boolean",
+      "name" : "emailVerified",
+      "wrappers" : [ ],
+      "default" : "false"
+    } ],
+    "references" : [ ],
+    "primaryKeys" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    } ],
+    "uniques" : [ {
+      "properties" : [ {
+        "dslType" : "text",
+        "name" : "email",
+        "wrappers" : [ ],
+        "minSize" : "6",
+        "maxSize" : "128"
+      } ]
+    }, {
+      "properties" : [ {
+        "dslType" : "text",
+        "name" : "emailVerificationCode",
+        "wrappers" : [ "OPTIONAL" ],
+        "minSize" : "64",
+        "maxSize" : "64"
+      } ]
+    } ],
+    "indices" : [ ]
+  }, {
+    "name" : "Todo",
+    "properties" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "long",
+      "name" : "userId",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "text",
+      "name" : "task",
+      "wrappers" : [ ],
+      "minSize" : "1",
+      "maxSize" : "100"
+    }, {
+      "dslType" : "date",
+      "name" : "date",
+      "wrappers" : [ ]
+    } ],
+    "references" : [ {
+      "name" : "user",
+      "model" : "User",
+      "properties" : [ {
+        "dslType" : "long",
+        "name" : "userId",
+        "wrappers" : [ ]
+      } ]
+    } ],
+    "primaryKeys" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    } ],
+    "uniques" : [ ],
+    "indices" : [ ]
+  }, {
+    "name" : "UserSession",
+    "properties" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "long",
+      "name" : "userId",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "text",
+      "name" : "accessToken",
+      "wrappers" : [ ],
+      "minSize" : "64",
+      "maxSize" : "64"
+    }, {
+      "dslType" : "datetime",
+      "name" : "accessTokenExpires",
+      "wrappers" : [ ]
+    }, {
+      "dslType" : "text",
+      "name" : "refreshToken",
+      "wrappers" : [ ],
+      "minSize" : "64",
+      "maxSize" : "64"
+    }, {
+      "dslType" : "datetime",
+      "name" : "refreshTokenExpires",
+      "wrappers" : [ ]
+    } ],
+    "references" : [ {
+      "name" : "user",
+      "model" : "User",
+      "properties" : [ {
+        "dslType" : "long",
+        "name" : "userId",
+        "wrappers" : [ ]
+      } ]
+    } ],
+    "primaryKeys" : [ {
+      "dslType" : "long",
+      "name" : "id",
+      "wrappers" : [ ]
+    } ],
+    "uniques" : [ {
+      "properties" : [ {
+        "dslType" : "text",
+        "name" : "accessToken",
+        "wrappers" : [ ],
+        "minSize" : "64",
+        "maxSize" : "64"
+      } ]
+    }, {
+      "properties" : [ {
+        "dslType" : "text",
+        "name" : "refreshToken",
+        "wrappers" : [ ],
+        "minSize" : "64",
+        "maxSize" : "64"
+      } ]
+    } ],
+    "indices" : [ ]
+  } ]
+}

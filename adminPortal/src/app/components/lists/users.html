@@ -1,0 +1,25 @@
+<div ng-repeat="item in model" data-ng-click="onSelect(item)">
+    <dl>
+        <dt>{{'USERS_ID' | translate}}</dt>
+        <dd>{{item.id}}</dd>
+        <dt>{{'USERS_FIRST_NAME' | translate}}</dt>
+        <dd>{{item.firstName}}</dd>
+        <dt>{{'USERS_LAST_NAME' | translate}}</dt>
+        <dd>{{item.lastName}}</dd>
+        <dt>{{'USERS_ROLE' | translate}}</dt>
+        <dd>{{item.role}}</dd>
+        <dt>{{'USERS_EMAIL' | translate}}</dt>
+        <dd>{{item.email}}</dd>
+        <dt>{{'USERS_PASSWORD_HASH' | translate}}</dt>
+        <dd>{{item.passwordHash}}</dd>
+        <dt>{{'USERS_EMAIL_VERIFICATION_CODE' | translate}}</dt>
+        <dd>{{item.emailVerificationCode}}</dd>
+        <dt>{{'USERS_EMAIL_VERIFICATION_CODE_TIMESTAMP' | translate}}</dt>
+        <dd>{{item.emailVerificationCodeTimestamp}}</dd>
+        <dt>{{'USERS_EMAIL_VERIFIED' | translate}}</dt>
+        <dd>{{item.emailVerified}}</dd>
+    </dl>
+</div>
+<div ng-show="errorCode">
+    <div class="error">{{errorCode | translate}}</div>
+</div>

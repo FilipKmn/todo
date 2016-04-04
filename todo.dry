@@ -50,12 +50,12 @@
                 }
             )
             todoCreatePage page[path /todo/create, secured CUSTOMER](
-                todoCreateForm form[submit backend.TodoApi.todo.create]{
+                todoCreateForm form[submit backend.TodoApi.createTodo]{
                     on success goto todoPage
                 }
             )
             todoEditPage page[path /todo/edit/:id, params(id long), secured CUSTOMER](
-                todoEditForm form[load backend.TodoApi.todo.read(params.id), submit backend.TodoApi.todo.update]{
+                todoEditForm form[load backend.TodoApi.readTodo(params.id), submit backend.TodoApi.updateTodo]{
                     on success goto todoPage
                 }
             )
