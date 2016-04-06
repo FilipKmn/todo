@@ -22,6 +22,7 @@ import todo.backend.rest.dto.*;
 
 
 @RestController
+@RequestMapping("/api/")
 public class TodoApi {
 
     private final Logger log = LoggerFactory.getLogger(TodoApi.class);
@@ -58,12 +59,7 @@ public class TodoApi {
     @Transactional
     public ResponseEntity<CreateTodoResponse> createTodo(@Valid @RequestBody CreateTodoRequest request) throws URISyntaxException {
         log.debug("POST /todo {}", request);
-        Todo todo = new Todo();
-        User user = userRepository.findOne(request.getUserId());
-        todo.setUser(user);
-        todo.setTask(request.getTask());
-        todo.setDate(request.getDate());
-
+        Todo todo = convertToTodo(request);
         Todo result = todoRepository.save(todo);
         return ResponseEntity.created(new URI("/todo/" + result.getId())).body(convertToCreateTodoResponse(result));
     }
@@ -73,11 +69,7 @@ public class TodoApi {
     @Transactional
     public ResponseEntity<UpdateTodoResponse> updateTodo(@PathVariable Long id, @Valid @RequestBody RestUpdateTodoRequest request) throws URISyntaxException {
         log.debug("PUT /todo/{} {}", id, request);
-        Todo todo = new Todo();
-        todo.setId(id);
-        todo.setTask(request.getTask());
-        todo.setDate(request.getDate());
-
+        Todo todo = convertToTodo(id, request);
         Todo result = todoRepository.save(todo);
         return ResponseEntity.ok().body(convertToUpdateTodoResponse(result));
     }
@@ -87,7 +79,6 @@ public class TodoApi {
     @Transactional
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) throws URISyntaxException {
         log.debug("DELETE /todo/{}", id);
-
         todoRepository.delete(id);
         return ResponseEntity.ok().build();
     }
@@ -119,6 +110,15 @@ public class TodoApi {
         return dto;
     }
 
+    private Todo convertToTodo(CreateTodoRequest dto) {
+        Todo todo = new Todo();
+        User user = userRepository.findOne(dto.getUserId());
+        todo.setUser(user);
+        todo.setTask(dto.getTask());
+        todo.setDate(dto.getDate());
+        return todo;
+    }
+
     private CreateTodoResponse convertToCreateTodoResponse(Todo model) {
         CreateTodoResponse dto = new CreateTodoResponse();
         dto.setId(model.getId());
@@ -126,6 +126,14 @@ public class TodoApi {
         dto.setTask(model.getTask());
         dto.setDate(model.getDate());
         return dto;
+    }
+
+    private Todo convertToTodo(Long id, RestUpdateTodoRequest dto) {
+        Todo todo = new Todo();
+        todo.setId(id);
+        todo.setTask(dto.getTask());
+        todo.setDate(dto.getDate());
+        return todo;
     }
 
     private UpdateTodoResponse convertToUpdateTodoResponse(Todo model) {

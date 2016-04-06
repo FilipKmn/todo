@@ -22,6 +22,7 @@ import todo.backend.rest.dto.*;
 
 
 @RestController
+@RequestMapping("/api/")
 public class AuthenticationApi {
 
     private final Logger log = LoggerFactory.getLogger(AuthenticationApi.class);
