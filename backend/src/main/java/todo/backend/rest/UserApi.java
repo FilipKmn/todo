@@ -1,7 +1,5 @@
 package todo.backend.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import com.codahale.metrics.annotation.Timed;
 import todo.backend.model.*;
 import todo.backend.repository.*;
-import todo.backend.repository.tuple.*;
 import todo.backend.rest.dto.*;
 
 
@@ -36,7 +33,7 @@ public class UserApi {
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<UsersResponse>> users() throws URISyntaxException {
+    public ResponseEntity<List<UsersResponse>> users() {
         log.debug("GET /users");
         List<User> result = userRepository.users();
         return ResponseEntity.ok().body(result.stream().map(this::convertToUsersResponse).collect(Collectors.toList()));
@@ -45,7 +42,7 @@ public class UserApi {
     @RequestMapping(value = "/userTodos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<UserTodosResponse>> userTodos(@Valid @RequestBody UserTodosRequest request) throws URISyntaxException {
+    public ResponseEntity<List<UserTodosResponse>> userTodos(@Valid @RequestBody UserTodosRequest request) {
         log.debug("GET /userTodos {}", request);
         List<Todo> result = todoRepository.userTodosPaged(request.getUserId(), request.getDrop(), request.getTake());
         return ResponseEntity.ok().body(result.stream().map(this::convertToUserTodosResponse).collect(Collectors.toList()));

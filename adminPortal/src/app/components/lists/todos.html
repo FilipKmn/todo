@@ -10,6 +10,7 @@
         <dd>{{item.date}}</dd>
     </dl>
 </div>
+<div data-ng-repeat="page in pages" data-ng-click="onPageSelect(page)" data-ng-class="{selectedpage : page === selectedPage}">{{page}}</div>
 <div ng-show="errorCode">
     <div class="error">{{errorCode | translate}}</div>
 </div>

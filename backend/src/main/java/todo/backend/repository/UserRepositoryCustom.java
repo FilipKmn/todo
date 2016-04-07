@@ -5,7 +5,6 @@ import java.util.*;
 
 import todo.backend.model.*;
 import todo.backend.model.enumeration.*;
-import todo.backend.repository.tuple.*;
 
 
 public interface UserRepositoryCustom {

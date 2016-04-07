@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import com.codahale.metrics.annotation.Timed;
 import todo.backend.model.*;
 import todo.backend.repository.*;
-import todo.backend.repository.tuple.*;
 import todo.backend.rest.dto.*;
 
 
@@ -36,7 +35,7 @@ public class TodoApi {
     @RequestMapping(value = "/todos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<FindTodoResponse>> findTodo(@Valid @RequestBody FindTodoRequest request) throws URISyntaxException {
+    public ResponseEntity<List<FindTodoResponse>> findTodo(@Valid @RequestBody FindTodoRequest request) {
         log.debug("GET /todos {}", request);
         List<Todo> result = todoRepository.findAllPaged(request.getDrop(), request.getTake());
         return ResponseEntity.ok().body(result.stream().map(this::convertToFindTodoResponse).collect(Collectors.toList()));
@@ -45,7 +44,7 @@ public class TodoApi {
     @RequestMapping(value = "/todo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<ReadTodoResponse> readTodo(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<ReadTodoResponse> readTodo(@PathVariable Long id) {
         log.debug("GET /todo/{}", id);
         Optional<Todo> result = Optional.ofNullable(todoRepository.findOne(id));
         if (result.isPresent()) {
@@ -67,7 +66,7 @@ public class TodoApi {
     @RequestMapping(value = "/todo/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional
-    public ResponseEntity<UpdateTodoResponse> updateTodo(@PathVariable Long id, @Valid @RequestBody RestUpdateTodoRequest request) throws URISyntaxException {
+    public ResponseEntity<UpdateTodoResponse> updateTodo(@PathVariable Long id, @Valid @RequestBody RestUpdateTodoRequest request) {
         log.debug("PUT /todo/{} {}", id, request);
         Todo todo = convertToTodo(id, request);
         Todo result = todoRepository.save(todo);
@@ -77,7 +76,7 @@ public class TodoApi {
     @RequestMapping(value = "/todo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional
-    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         log.debug("DELETE /todo/{}", id);
         todoRepository.delete(id);
         return ResponseEntity.ok().build();
@@ -86,7 +85,7 @@ public class TodoApi {
     @RequestMapping(value = "/todos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<TodosResponse>> todos() throws URISyntaxException {
+    public ResponseEntity<List<TodosResponse>> todos() {
         log.debug("GET /todos");
         List<Todo> result = todoRepository.todos(request.getPrincipalId());
         return ResponseEntity.ok().body(result.stream().map(this::convertToTodosResponse).collect(Collectors.toList()));

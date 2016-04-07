@@ -13,7 +13,7 @@
                 base64: '=?',
                 fileName: '=?'
             },
-            templateUrl: "app/components/imageSelectors/imageSelector.html",
+            templateUrl: "src/app/components/imageSelectors/imageSelector.html",
             controller: 'ImageSelectorController',
         }
     });
@@ -22,17 +22,12 @@
     ImageSelectorController.$inject = ['$scope', 'fileApi', '$element'];
 
     function ImageSelectorController($scope, fileApi, element) {
-
-        $scope.flagValid = null;
-
         // watch for changes on input
         var input = element.find('input')[0];
         input.addEventListener('change', onChange);
 
         $scope.$watch('path', function(path) {
             if (path) {
-                $scope.flagValid = "true";
-
                 var splitted = $scope.path.split("/");
                 var model = {
                     key: splitted[0],
@@ -57,11 +52,9 @@
                 if (this.result.indexOf("data:image/") === 0) {
                     var base64Regex = "base64,";
                     $scope.base64 = event.target.result.substring(event.target.result.indexOf(base64Regex) + base64Regex.length);
-                    $scope.flagValid = "true";
                     $scope.$apply();
                 } else {
                     $scope.path = null;
-                    $scope.flagValid = null;
                     console.log("Not an image!");
                 }
             }

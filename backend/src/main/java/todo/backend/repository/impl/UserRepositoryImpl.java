@@ -1,10 +1,7 @@
 package todo.backend.repository.impl;
 
-import static com.querydsl.core.group.GroupBy.*;
-
 import java.time.*;
 import java.util.*;
-import java.util.stream.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +11,7 @@ import javax.inject.Inject;
 import todo.backend.model.*;
 import todo.backend.model.enumeration.*;
 import todo.backend.repository.UserRepositoryCustom;
-import todo.backend.repository.tuple.*;
 
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQueryFactory;
 
 

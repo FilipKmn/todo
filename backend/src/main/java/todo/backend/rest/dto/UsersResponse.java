@@ -2,7 +2,6 @@ package todo.backend.rest.dto;
 
 import java.io.Serializable;
 import java.time.*;
-import java.util.*;
 
 import javax.validation.constraints.*;
 

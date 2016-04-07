@@ -3,8 +3,6 @@
     <div class="edit-image">
         <div class="icon-upload-photo"></div>
         <div class="upload-text">{{'UPLOAD_PHOTO' | translate}}</div>
-        <input type="file" ng-model="key" />
-        <input type="text" ng-show="false" required ng-model="flagValid" id="{{id}}" name="{{name}}"> {{name}}
+        <input type="file" ng-model="fileName" id="{{id}}" name="{{name}}" ng-required="required === 'true'">
     </div>
-    <div class="required-image-sign" data-ng-show="required">*</div>
 </div>

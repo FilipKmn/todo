@@ -1,7 +1,5 @@
 package todo.backend.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import com.codahale.metrics.annotation.Timed;
 import todo.backend.model.*;
 import todo.backend.repository.*;
-import todo.backend.repository.tuple.*;
 import todo.backend.rest.dto.*;
 
 
