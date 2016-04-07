@@ -82,13 +82,13 @@ public class TodoApi {
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value = "/todos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/allTodos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(readOnly = true)
-    public ResponseEntity<List<TodosResponse>> todos() {
-        log.debug("GET /todos");
-        List<Todo> result = todoRepository.todos(request.getPrincipalId());
-        return ResponseEntity.ok().body(result.stream().map(this::convertToTodosResponse).collect(Collectors.toList()));
+    public ResponseEntity<List<AllTodosResponse>> allTodos() {
+        log.debug("GET /allTodos");
+        List<Todo> result = todoRepository.allTodos();
+        return ResponseEntity.ok().body(result.stream().map(this::convertToAllTodosResponse).collect(Collectors.toList()));
     }
 
     private FindTodoResponse convertToFindTodoResponse(Todo model) {
@@ -144,8 +144,8 @@ public class TodoApi {
         return dto;
     }
 
-    private TodosResponse convertToTodosResponse(Todo model) {
-        TodosResponse dto = new TodosResponse();
+    private AllTodosResponse convertToAllTodosResponse(Todo model) {
+        AllTodosResponse dto = new AllTodosResponse();
         dto.setId(model.getId());
         dto.setUserId(model.getUser().getId());
         dto.setTask(model.getTask());

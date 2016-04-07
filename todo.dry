@@ -20,7 +20,7 @@
     
             TodoApi api(
                 todo crud[model Todo, rest, secured (ADMIN, CUSTOMER)]
-                todos find[from Todo where Todo.user == principal, rest, secured (ADMIN, CUSTOMER)]
+		allTodos find[from Todo, rest, secured (ADMIN)]
             )
     
             UserApi api(
@@ -45,7 +45,7 @@
             todoPage page[path /todo/list, secured CUSTOMER](
                 addTodo button {on click goto todoCreatePage}
     
-                todos list[load backend.TodoApi.todos]{
+                todos list[load backend.TodoApi.allTodos]{
                     on select goto todoEditPage(selected.id)
                 }
             )

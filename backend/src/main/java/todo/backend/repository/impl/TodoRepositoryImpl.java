@@ -44,10 +44,10 @@ public class TodoRepositoryImpl implements TodoRepositoryCustom {
     }
 
     @Override
-    public List<Todo> todos(Long principalId) {
-        log.trace(".todos(principalId: {})", principalId);
+    public List<Todo> allTodos() {
+        log.trace(".allTodos()");
         QTodo todo = new QTodo("todo");
-        return factory.select(todo).from(todo).where(todo.user.id.eq(principalId)).fetch();
+        return factory.select(todo).from(todo).fetch();
     }
 
     @Override

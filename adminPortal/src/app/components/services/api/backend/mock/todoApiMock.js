@@ -49,7 +49,7 @@
             });
         };
 
-        this.todos = function() {
+        this.allTodos = function() {
             $timeout(function() {
                 successCallback({
                     //TODO fill up mocked data values

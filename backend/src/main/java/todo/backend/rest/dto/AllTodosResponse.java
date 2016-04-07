@@ -6,7 +6,7 @@ import java.time.*;
 import javax.validation.constraints.*;
 
 
-public class TodosResponse implements Serializable {
+public class AllTodosResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -63,7 +63,7 @@ public class TodosResponse implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        TodosResponse other = (TodosResponse) obj;
+        AllTodosResponse other = (AllTodosResponse) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -100,7 +100,7 @@ public class TodosResponse implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("TodosResponse [id=%s, userId=%s, task=%s, date=%s]", id, userId, task, date);
+        return String.format("AllTodosResponse [id=%s, userId=%s, task=%s, date=%s]", id, userId, task, date);
     }
 
 }

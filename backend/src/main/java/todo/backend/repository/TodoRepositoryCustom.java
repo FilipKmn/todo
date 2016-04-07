@@ -14,7 +14,7 @@ public interface TodoRepositoryCustom {
 
     List<Todo> findByDate(LocalDate date);
 
-    List<Todo> todos(Long principalId);
+    List<Todo> allTodos();
 
     List<Todo> userTodos(Long userId);
 

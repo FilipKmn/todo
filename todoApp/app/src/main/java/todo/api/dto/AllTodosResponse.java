@@ -4,14 +4,14 @@ import todo.api.enumeration.*;
 import java.util.*;
 
 
-public class TodosResponse {
+public class AllTodosResponse {
 
     private final Long id;
     private final Long userId;
     private final String task;
     private final Date date;
 
-    public TodosResponse(Long id, Long userId, String task, Date date) {
+    public AllTodosResponse(Long id, Long userId, String task, Date date) {
         this.id = id;
         this.userId = userId;
         this.task = task;

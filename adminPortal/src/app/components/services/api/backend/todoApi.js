@@ -86,10 +86,10 @@
             });
         };
 
-        this.todos = function() {
+        this.allTodos = function() {
             return $http({
                 method: 'GET',
-                url: backendApiUrl + '/api/todos',
+                url: backendApiUrl + '/api/allTodos',
                 headers: {
                     'X-TODO-AUTH': sessionService.getSessionData().accessToken
                 }

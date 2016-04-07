@@ -112,12 +112,12 @@ public class ApiService {
         delete(url, headers, null, Void.class, listener, errorListener, tag);
     }
 
-    public void todos(Response.Listener<TodosResponse[]> listener, Response.ErrorListener errorListener, String tag) {
-        String url = serverHost + "/todos";
+    public void allTodos(Response.Listener<AllTodosResponse[]> listener, Response.ErrorListener errorListener, String tag) {
+        String url = serverHost + "/allTodos";
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(AUTHORIZATION, accessToken);
 
-        get(url, headers, null, TodosResponse[].class, listener, errorListener, tag);
+        get(url, headers, null, AllTodosResponse[].class, listener, errorListener, tag);
     }
 
     public void users(Response.Listener<UsersResponse[]> listener, Response.ErrorListener errorListener, String tag) {
